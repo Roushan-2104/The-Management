@@ -1,20 +1,20 @@
 import {useEffect,useRef,useState} from 'react'
 import {projectFirestore} from '../config/config'
 
-export const useCollection = (collection, _query,_orderBy) => {
+export const useCollection = (collection,_orderBy) => {
     const [documents, setDocuments] = useState(null)
     const [error, setError] = useState(null)
     const [isPending, setIsPending] = useState(true)
 
-    const query = useRef(_query).current
+    // const query = useRef(_query).current
     const orderBy = useRef(_orderBy).current
 
     useEffect(() => {
         let ref = projectFirestore.collection(collection)
 
-        if (query){
-            ref = ref.where(...query)
-        }
+        // if (query){
+        //     ref = ref.where(...query)
+        // }
         if(orderBy){
             ref = ref.orderBy(...orderBy)
         }
@@ -37,7 +37,7 @@ export const useCollection = (collection, _query,_orderBy) => {
         })
         return () => unsub()
         
-    }, [collection, query, orderBy])
+    }, [collection, orderBy])
 
     return {documents,error,isPending}
 }

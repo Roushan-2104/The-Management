@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react"
-import { projectAuth } from "../config/config"
+import { projectAuth,projectFirestore } from "../config/config"
 import {useAuthContext} from './useAuthContext'
 
 
@@ -14,7 +14,11 @@ export const useLogin = () => {
         setIsPending(true)
 
         try {
+
             const res = await projectAuth.signInWithEmailAndPassword(email,password)
+            
+            const documentRef = projectFirestore.collection('users').doc(res.user.uid)
+            await documentRef.update({ online: true })
 
             if(!res){
                 throw new Error('Could Not Complete Sign-In')
@@ -24,6 +28,7 @@ export const useLogin = () => {
             if(!isCancel){
                 setIsPending(false)
                 setError(null)
+                
             }
             
         } catch (err) {
