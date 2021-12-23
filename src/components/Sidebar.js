@@ -2,8 +2,6 @@ import { NavLink } from "react-router-dom"
 import { useAuthContext } from "../hooks/useAuthContext"
 import LogOut from '../assets/logout.svg'
 
-
-
 // styles & images
 import "./Sidebar.css"
 import DashboardIcon from '../assets/dashboard_icon.svg'

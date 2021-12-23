@@ -6,7 +6,6 @@ export default function Modal() {
         <div>
             <button className="btn btn-primary-outline text-center" style={{cursor:'pointer'}} data-bs-toggle="modal" data-bs-target="#Users">
                 <img src={User} alt='users' />
-                <p>Users</p>
             </button>
             <div
         className="modal fade" 
@@ -15,7 +14,7 @@ export default function Modal() {
         aria-labelledby="modal-title"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-sm modal-dialog-scrollable">
+        <div className="modal-dialog modal-sm modal-dialog-scrollable modal-dialog-centered">
           <div className="modal-content">
             <div className="text-end">
               <button

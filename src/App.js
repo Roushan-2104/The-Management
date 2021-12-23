@@ -7,7 +7,7 @@ import Signup from './pages/SignUp/Signup'
 import Project from './pages/Project/Project'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
-// import Online from './components/Online'
+import Online from './components/Online'
 import {useAuthContext} from './hooks/useAuthContext'
 
 
@@ -32,11 +32,11 @@ function App() {
               <Route path='/details/:id' element={user ? <Project/> : <Navigate to='/login'/>} />
             </Routes>
           </div>
-          {/* {user &&
+          {user &&
             <div className='d-lg-block d-none user-list'>
                 <Online/>
             </div>
-           } */}
+           }
         </>
       )}
 

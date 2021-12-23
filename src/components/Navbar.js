@@ -8,8 +8,7 @@ import Temple from '../assets/temple.svg'
 import { useAuthContext } from '../hooks/useAuthContext'
 import OffCanvas from './OffCanvas'
 import { projectFirestore } from '../config/config'
-// import Online from './Online'
-// import Modal from './Modal'
+import Modal from './Modal'
 
 export default function Navbar() {
   const {logout, isPending} = useLogOut()
@@ -38,12 +37,12 @@ export default function Navbar() {
         )}
         {user && (
           <>
+            <li className='d-lg-none d-block me-3'>
+                <Modal/>
+            </li>
             <li className='d-lg-none d-block'>
               <OffCanvas/>
             </li>
-            {/* <li className='d-lg-none d-block ms-4'>
-                <Modal/>
-            </li> */}
             <li className='d-lg-block d-none'>
               {!isPending && <button className="btn" onClick={logout}>Logout</button>}
               {isPending && <button className="btn" disabled><em>Logging out...</em></button>}

@@ -30,7 +30,7 @@ export default function Create() {
   const [dueDate, setDueDate] = useState('')
   const [category, setCategory] = useState('')
   const [assignedUsers, setAssignedUsers] = useState([])
-  const [formError, setFormError] = useState(null)
+  const [formError, setFormError] = useState(null) 
   const [isPending, setIsPending] = useState(false)
 
   // create user values for react-select
@@ -46,6 +46,7 @@ export default function Create() {
     e.preventDefault()
     setFormError(null)
     setIsPending(true)
+
 
     if (!category) {
       setFormError('Please select a project category.')
@@ -76,7 +77,7 @@ export default function Create() {
       createdBy,
       category: category.value,
       dueDate: timeStamp.fromDate(new Date(dueDate)),
-      comments: []
+      comments: [],
     }
 
     await addDocument(project)
@@ -98,6 +99,7 @@ export default function Create() {
             onChange={(e) => setName(e.target.value)}
             value={name}
             maxLength={20}
+            placeholder='Name of the Project...'
           />
         </label>
         <label>
@@ -106,6 +108,7 @@ export default function Create() {
             required
             onChange={(e) => setDetails(e.target.value)}
             value={details} 
+            placeholder='Details of the Project...'
           ></textarea>
         </label>
         <label>
@@ -124,7 +127,7 @@ export default function Create() {
             options={categories}
             menuPlacement='top'
           />
-        </label>
+        </label> 
         <label>
           <span>Assign to:</span>
           <Select
@@ -134,6 +137,10 @@ export default function Create() {
             menuPlacement='top'
           />
         </label>
+        {/* <label>
+          <span style={{display:'inline-block'}}>Private Project:</span>
+          <input type="checkbox"  name="acceptRules" className="inline checkbox" id="checkbox1" value="false" onChange={(e) => PrivateProject(e.target.value)}/>
+        </label> */}
 
         {!isPending && <button className="btn">Add Project</button> }
         {isPending && <button className="btn" disabled>Add Project</button> }

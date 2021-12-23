@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState} from "react"
 import Avatar from "../../components/Avatar"
 import { timeStamp } from "../../config/config"
 import { useAuthContext } from "../../hooks/useAuthContext"
@@ -9,7 +9,6 @@ export default function ProjectComments({project}) {
     const [newComment, setNewComment] = useState('')
     const {user} = useAuthContext()
     const {updateDocument, response} = useFirestore('projects')
-
     const handleSubmit = async (e) => {
         e.preventDefault()
  
@@ -32,20 +31,22 @@ export default function ProjectComments({project}) {
     return (
         <div className="project-comments">
             <h4>Project Comments</h4>
-            <ul>
+            <ul className="comments">
                 {project.comments.length > 0 && project.comments.map(comment => (
-                    <li key={comment.id}>
-                        <div className="comment-author">
-                        <Avatar src={comment.photoURL} />
-                        <p>{comment.displayName}</p>
-                        </div>
-                        <div className="comment-date">
-                        <p>{formatDistanceToNow(comment.createdAt.toDate(), {addSuffix:true})}</p>
-                        </div>
-                        <div className="comment-content">
-                        <p>{comment.content}</p>
-                        </div>
-                    </li>
+                    <div className="one-comment">
+                        <li key={comment.id}>
+                            <div className="comment-author">
+                            <Avatar src={comment.photoURL} />
+                            <p>{comment.displayName}</p>
+                            </div>
+                            <div className="comment-date">
+                            <p>{formatDistanceToNow(comment.createdAt.toDate(), {addSuffix:true})}</p>
+                            </div>
+                            <div className="comment-content">
+                            <p>{comment.content}</p>
+                            </div>
+                        </li>
+                    </div>
                 ))}
             </ul>
 
