@@ -7,6 +7,7 @@ import "./Sidebar.css"
 import DashboardIcon from '../assets/dashboard_icon.svg'
 import AddIcon from '../assets/add_icon.svg'
 import Avatar from "./Avatar"
+// import Chat from '../assets/chat.svg'
 import { useLogOut } from "../hooks/useLogOut"
 // import Modal from "./Modal"
 
@@ -37,6 +38,12 @@ export default function Sidebar() {
                   <span>New Project</span>
                 </NavLink>
               </li>
+              {/* <li>
+                <NavLink to="/chat" className="anchor">
+                  <img src={Chat} alt="chat project icon" />
+                  <span>Chat</span>
+                </NavLink>
+              </li> */}
               <li className="d-lg-none d-block">
                 <div className="anchor">
                   <img src ={LogOut} alt="logout"/>

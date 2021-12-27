@@ -42,8 +42,6 @@ export const useFirestore = (collection) => {
         if(!isCancel){
             dispatch(action)
         }
-
-
     }
 
     const addDocument = async (doc) => {
@@ -53,8 +51,7 @@ export const useFirestore = (collection) => {
             const createdAt = timeStamp.fromDate(new Date())
             const addedDocument = await ref.add({...doc, createdAt})
             dispatchIfNotCancelled({type:'ADDED_DOC' , payload:addedDocument})
-
-
+            
         } catch (err) {
             dispatchIfNotCancelled({tpe:'ERROR', payload:err.message})
         }

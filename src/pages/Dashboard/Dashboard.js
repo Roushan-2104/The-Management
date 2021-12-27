@@ -18,7 +18,11 @@ export default function Dashboard() {
     const projects = documents ? documents.filter((document) => {
         switch (currentFilter){
             case 'all':
-                return true
+                let all = false
+                if (document.visibility === 'public') {
+                    all = true
+                }
+                return all
 
             case 'mine':
                 let assignedToMe = false
@@ -28,13 +32,31 @@ export default function Dashboard() {
                     }
                 })
                 return assignedToMe
+            
+            case 'private':
+                console.log(document.visibility, currentFilter)
+                let privateView = false
+                if(document.visibility === currentFilter){
+                    document.assignedUsersList.forEach((u) => { 
+                        if(user.uid === u.id || document.createdBy.id === user.uid){
+                            privateView = true
+                        }
+                    })
+                }
+                return privateView
 
             case 'development': 
             case 'design':
             case 'sales':
             case 'marketing':
                 console.log(document.category, currentFilter)
-                return document.category === currentFilter
+                let category = false
+                if (document.visibility === 'public') {
+                    if(document.category === currentFilter){
+                        category = true
+                    }
+                }
+                return category
             
             default:
                 return true
@@ -45,7 +67,13 @@ export default function Dashboard() {
     return (
         <div className='dashboard'>
             <h2 className='page-title'>Dashboard</h2>
-            {isPending && <p className='text-center fs-3 mt-5 text-warning'><em>Loading......</em></p>}
+            {isPending && 
+                <div className='text-center mt-5'>
+                    <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                }
             {documents && 
                 <ProjectFilter currentFilter={currentFilter} changeFilter={changeFilter}
              />}

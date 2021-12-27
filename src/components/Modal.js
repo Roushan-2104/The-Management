@@ -1,5 +1,6 @@
 import User from '../assets/user.svg'
 import Online from './Online'
+import './Modal.css'
 
 export default function Modal() {
     return (

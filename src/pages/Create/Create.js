@@ -16,6 +16,11 @@ const categories = [
   { value: 'sales', label: 'Sales' },
   { value: 'marketing', label: 'Marketing' },
 ]
+const visible = [
+  {value: 'private' ,label:'Private'},
+  {value: 'public' ,label:'Public'},
+
+]
 
 export default function Create() {
   const history = useNavigate()
@@ -32,6 +37,7 @@ export default function Create() {
   const [assignedUsers, setAssignedUsers] = useState([])
   const [formError, setFormError] = useState(null) 
   const [isPending, setIsPending] = useState(false)
+  const [visibility, setVisibility] = useState('')
 
   // create user values for react-select
   useEffect(() => {
@@ -52,6 +58,10 @@ export default function Create() {
       setFormError('Please select a project category.')
       return
     }
+    if(!visibility){
+      setFormError('Please select visibility.')
+      return
+    }
     if (assignedUsers.length < 1) {
       setFormError('Please assign the project to at least 1 user')
       return
@@ -69,7 +79,7 @@ export default function Create() {
       photoURL: user.photoURL,
       id: user.uid
     }
-
+  
     const project = {
       name,
       details,
@@ -78,6 +88,7 @@ export default function Create() {
       category: category.value,
       dueDate: timeStamp.fromDate(new Date(dueDate)),
       comments: [],
+      visibility: visibility.value
     }
 
     await addDocument(project)
@@ -137,15 +148,21 @@ export default function Create() {
             menuPlacement='top'
           />
         </label>
-        {/* <label>
-          <span style={{display:'inline-block'}}>Private Project:</span>
-          <input type="checkbox"  name="acceptRules" className="inline checkbox" id="checkbox1" value="false" onChange={(e) => PrivateProject(e.target.value)}/>
-        </label> */}
+        <label>
+          <span>Visibility: </span>
+          <Select
+            onChange={(option) => setVisibility(option)}
+            options={visible}
+            menuPlacement='top'
+            />
+        </label>
 
+        
+        {formError && <p className="error">{formError}</p>}
         {!isPending && <button className="btn">Add Project</button> }
         {isPending && <button className="btn" disabled>Add Project</button> }
 
-        {formError && <p className="error">{formError}</p>}
+        
       </form>
     </div>
   )

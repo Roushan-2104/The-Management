@@ -14,6 +14,7 @@ export const useSignUp = () => {
 
         try { 
             const res =  await projectAuth.createUserWithEmailAndPassword(email,password)
+
             
             if(!res){
                 throw new Error('Could Not Complete Sign-Up')
